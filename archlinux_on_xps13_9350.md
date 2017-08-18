@@ -51,8 +51,8 @@ Creating the encrypted lvm container (I chose 40 GB for root as I tend to have a
 ~~~~
 
 Making filesystems for the new "partitions":
-~~~~
-    mkfs.ext4 /dev/mapper/vgroup-root
+~~~~	
+	mkfs.ext4 /dev/mapper/vgroup-root
 	mkfs.ext4 /dev/mapper/vgroup-home
 	mkswap /dev/mapper/vgroup-swap
 ~~~~
@@ -60,12 +60,12 @@ Making filesystems for the new "partitions":
 ### Mount partitions
 
 ~~~~
-    mount /dev/mapper/vgroup-root /mnt
-    mkdir -p /mnt/boot
-    mount /dev/nvme0n1p1 /mnt/boot
-    mkdir -p /mnt/home
-    mount /dev/mapper/vgroup-home /mnt/home
-    swapon -va /dev/mapper/vgroup-swap
+	mount /dev/mapper/vgroup-root /mnt
+    	mkdir -p /mnt/boot
+    	mount /dev/nvme0n1p1 /mnt/boot
+   	mkdir -p /mnt/home
+    	mount /dev/mapper/vgroup-home /mnt/home
+    	swapon -va /dev/mapper/vgroup-swap
 ~~~~
 
 ### Connect to the internet
@@ -92,17 +92,17 @@ Set timezone:
 
 Append your locale to `/etc/locale.conf`, e.g.:
 ~~~~
-      LANG="en_GB.UTF-8"
-      LC_COLLATE="C"
+      	LANG="en_GB.UTF-8"
+      	LC_COLLATE="C"
 ~~~~
 Uncomment the corresponding line in `/etc/locale.gen`, e.g. `en_US.UTF-8`. Then run `locale-gen` to generate the locale.
 
 #### Configure mkinitcpio.conf
 Edit `/etc/mkinitcpio.conf` and add the needed hook for encryption as well the nvme to modules:
 ~~~~
-    MODULES="... nvme
-...
-    HOOKS=(... sata encrypt lvm2 filesystems ...)
+    	MODULES="... nvme
+	...
+    	HOOKS=(... sata encrypt lvm2 filesystems ...)
 ~~~~
 And afterwards run:
 `mkinitcpio -p linux`
