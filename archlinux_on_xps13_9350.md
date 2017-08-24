@@ -51,11 +51,12 @@ Creating the encrypted lvm container (I chose 40 GB for root as I tend to have a
 ~~~~
 
 Making filesystems for the new "partitions":
-~~~~	
+~~~~
 	mkfs.ext4 /dev/mapper/vgroup-root
 	mkfs.ext4 /dev/mapper/vgroup-home
 	mkswap /dev/mapper/vgroup-swap
 ~~~~
+*Note that it may be wise to change ext4 into another filesystem (as its on a SSD).*
 
 ### Mount partitions
 
